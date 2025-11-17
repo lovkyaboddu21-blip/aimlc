@@ -1,0 +1,39 @@
+/* style.css */
+body {
+  background-color: #e0f7fa;
+  font-family: Verdana, sans-serif;
+  text-align: center;
+  padding: 40px;
+}
+
+h1 {
+  color: #00796b;
+  font-size: 32px;
+}
+
+p {
+  color: #555;
+  font-size: 18px;
+}
+
+/* Flexbox container */
+.flex-container {
+  display: flex;               /* Activates Flexbox */
+  justify-content: space-around; /* Distributes space around items */
+  align-items: center;         /* Vertically centers items */
+  height: 200px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  margin: 20px;
+}
+
+/* Flex items */
+.box {
+  background-color: #4caf50;
+  color: white;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 8px;
+  width: 100px;
+  text-align: center;
+}
