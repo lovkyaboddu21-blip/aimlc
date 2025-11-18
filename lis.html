@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Offline Bootstrap Page</title>
-  <!-- Link to local Bootstrap CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <meta charset="UTF-8">
+  <title>3D Cube</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      perspective: 1000px;
+    }
+
+    .scene {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotate 10s infinite linear;
+    }
+
+    .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(0, 255, 255, 0.7);
+      border: 2px solid #0ff;
+    }
+
+    .front  { transform: translateZ(100px); }
+    .back   { transform: rotateY(180deg) translateZ(100px); }
+    .right  { transform: rotateY(90deg) translateZ(100px); }
+    .left   { transform: rotateY(-90deg) translateZ(100px); }
+    .top    { transform: rotateX(90deg) translateZ(100px); }
+    .bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+    @keyframes rotate {
+      from { transform: rotateX(0deg) rotateY(0deg); }
+      to   { transform: rotateX(360deg) rotateY(360deg); }
+    }
+  </style>
 </head>
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">MySite</a>
-    </div>
-  </nav>
-
-  <div class="container mt-5">
-    <h1 class="text-primary">Welcome to My Offline Bootstrap Page</h1>
-    <p>This page uses Bootstrap without an internet connection.</p>
-
-    <button class="btn btn-success">Click Me</button>
+  <div class="scene">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
   </div>
-
-  <!-- Link to local Bootstrap JS and dependencies -->
-  <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
