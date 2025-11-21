@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click the Circle Game</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #circle {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border-radius: 50%;
+      position: absolute;
+      display: none;
+      cursor: pointer;
+    }
+    #score {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click the Circle!</h1>
+  <p>Click the red circle as fast as you can when it appears.</p>
+  <div id="circle"></div>
+  <div id="score">Time: 0 ms</div>
+
+  <script>
+    const circle = document.getElementById("circle");
+    const score = document.getElementById("score");
+    let startTime;
+
+    function showCircle() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      circle.style.left = x + "px";
+      circle.style.top = y + "px";
+      circle.style.display = "block";
+      startTime = Date.now();
+    }
+
+    function startGame() {
+      const delay = Math.random() * 2000 + 1000;
+      setTimeout(showCircle, delay);
+    }
+
+    circle.addEventListener("click", () => {
+      const reactionTime = Date.now() - startTime;
+      score.textContent = `Time: ${reactionTime} ms`;
+      circle.style.display = "none";
+      startGame();
+    });
+
+    startGame();
+  </script>
+</body>
+</html>
