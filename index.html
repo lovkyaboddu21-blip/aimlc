@@ -1,272 +1,81 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>La Bella — Restaurant</title>
-  <meta name="description" content="La Bella — Fine dining, seasonal tasting menu, reservations & private events." />
-  <link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- tiny placeholder -->
-  <style>
-    /* --------- Reset & base ---------- */
-    :root{
-      --bg:#faf8f6; --card:#ffffff; --muted:#6b7280; --accent:#c2410c; --accent-2:#f97316;
-      --glass: rgba(255,255,255,0.6);
-      --max-width:1100px;
-      --radius:14px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color-scheme: light;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%; margin:0; background:linear-gradient(180deg,#fff 0%, #fbf7f4 100%);}
-    img{max-width:100%;display:block}
-    a{color:inherit;text-decoration:none}
+<meta charset="UTF-8">
+<title>Delicioso Restaurant</title>
 
-    /* ---------- Layout ---------- */
-    .container{width:94%;max-width:var(--max-width);margin:0 auto}
-    header{backdrop-filter: blur(6px); background:linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.35)); position:sticky; top:12px; margin:12px auto; border-radius:12px; box-shadow:0 6px 18px rgba(15,23,42,0.08)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px}
-    .brand h1{margin:0;font-size:18px}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
+<style>
+  body { margin:0; font-family: Arial; background:#111; color:white; text-align:center; }
+  nav { background:#000a; padding:15px; position:sticky; top:0; }
+  nav a { color:#ffcc00; margin:15px; cursor:pointer; font-weight:bold; text-decoration:none; }
+  .section { display:none; padding:40px; min-height:90vh; background-size:cover; background-position:center; }
+  .active { display:block; }
+  .menu-card, .box { background:#0008; margin:20px auto; padding:20px; width:60%; border-radius:12px; }
+  .menu-img { width:250px; border-radius:12px; }
+</style>
 
-    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
-    .btn{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:34px;align-items:center;padding:44px 18px}
-    .hero .intro{max-width:680px}
-    .eyebrow{display:inline-block;padding:6px 10px;border-radius:999px;background:#fff3ed;color:var(--accent);font-weight:700;font-size:12px}
-    h2{font-size:34px;margin:12px 0 8px;letter-spacing:-0.02em}
-    p.lead{color:var(--muted);line-height:1.6;margin:0 0 18px}
-
-    .hero .cta-row{display:flex;gap:12px;margin-top:12px}
-    .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:0 8px 30px rgba(15,23,42,0.06)}
-
-    /* reservation card */
-    .reserve{border-radius:16px;padding:22px}
-    .reserve label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}
-    .row{display:flex;gap:8px}
-    input,select{flex:1;padding:10px;border-radius:10px;border:1px solid #eee;background:transparent}
-    .reserve .actions{display:flex;gap:8px;margin-top:12px}
-
-    /* Menu section */
-    section.menu{padding:32px 18px}
-    .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .menu-item{padding:16px;border-radius:12px;background:linear-gradient(180deg,#fff,#fff);border:1px solid rgba(0,0,0,0.03)}
-    .menu-item h4{margin:0 0 6px}
-    .menu-item p{margin:0;font-size:13px;color:var(--muted)}
-
-    /* Gallery */
-    .gallery{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-top:18px}
-
-    /* About & contact */
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    footer{padding:28px 18px;color:var(--muted)}
-
-    /* Responsive */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;}
-      .menu-grid{grid-template-columns:repeat(2,1fr)}
-      .gallery{grid-template-columns:1fr}
-      header{top:0;margin:0;border-radius:0}
-    }
-    @media (max-width:560px){
-      .menu-grid{grid-template-columns:1fr}
-      .nav{padding:10px}
-      .logo{width:44px;height:44px;font-size:18px}
-      h2{font-size:26px}
-    }
-
-    /* small utilities */
-    .muted{color:var(--muted)}
-    .center{text-align:center}
-    .spacer{height:20px}
-    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:#fff}
-    .price{font-weight:700}
-  </style>
+<script>
+  function show(id){
+    document.querySelectorAll('.section').forEach(s=>s.style.display="none");
+    document.getElementById(id).style.display="block";
+  }
+</script>
 </head>
-<body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">LB</div>
-        <div>
-          <h1>La Bella</h1>
-          <p class="muted">Seasonal • Local • Thoughtful</p>
-        </div>
-      </div>
 
-      <nav>
-        <ul>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a class="btn" href="#reserve">Reserve</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<body onload="show('home')">
 
-  <main class="container">
-    <section class="hero">
-      <div class="intro">
-        <span class="eyebrow">Now offering tasting menus</span>
-        <h2>Simple ingredients. Bold flavors. Warm hospitality.</h2>
-        <p class="lead">We craft seasonal dishes from locally sourced ingredients — tasting menus, a small à la carte, and a thoughtful wine & cocktail list. Open for dinner Tuesday–Sunday.</p>
-        <div class="cta-row">
-          <a class="btn" href="#reserve">Book a Table</a>
-          <a class="tag" href="#menu">See Menu</a>
-        </div>
+<nav>
+  <a onclick="show('home')">Home</a>
+  <a onclick="show('menu')">Menu</a>
+  <a onclick="show('about')">About</a>
+  <a onclick="show('contact')">Contact</a>
+</nav>
 
-        <div class="spacer"></div>
+<!-- HOME -->
+<div id="home" class="section" style="background-image:url('https://images.unsplash.com/photo-1528605248644-14dd04022da1');">
+  <h1 style="margin-top:120px; font-size:3rem; text-shadow:2px 2px 10px black;">Delicioso Restaurant</h1>
+  <p>Fresh • Authentic • Delicious</p>
+</div>
 
-        <div class="card">
-          <h3 style="margin-top:0">Today's Specials</h3>
-          <div class="two-col">
-            <div>
-              <p class="muted">Starter</p>
-              <strong>Charred Octopus</strong>
-              <p class="muted">smoky pepper romesco, celery, lemon</p>
-            </div>
-            <div style="text-align:right">
-              <p class="price">₹725</p>
-              <p class="muted">Gluten-free</p>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- MENU -->
+<div id="menu" class="section" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836');">
+  <h1>Our Menu</h1>
 
-      <aside class="card reserve" id="reserve">
-        <h3 style="margin-top:0">Reserve a table</h3>
-        <p class="muted" style="margin:0 0 12px">Walk-ins welcome; reservations recommended for parties of 4+</p>
-        <label for="date">Date</label>
-        <input id="date" type="date" />
-        <div style="height:8px"></div>
-        <label for="time">Time</label>
-        <select id="time">
-          <option>6:00 PM</option>
-          <option>6:30 PM</option>
-          <option>7:00 PM</option>
-          <option>7:30 PM</option>
-          <option>8:00 PM</option>
-        </select>
-        <div style="height:8px"></div>
-        <label for="guests">Guests</label>
-        <select id="guests">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option selected>4</option>
-          <option>5</option>
-          <option>6+</option>
-        </select>
-        <div class="actions">
-          <button class="btn">Request</button>
-          <a class="tag" href="#contact">Call +91 98765 43210</a>
-        </div>
-      </aside>
-    </section>
+  <div class="menu-card">
+    <img class="menu-img" src="https://images.unsplash.com/photo-1604908176833-9fb7d0adf8b8">
+    <h3>Italian Pasta — ₹299</h3>
+  </div>
 
-    <section id="menu" class="menu">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
-        <div>
-          <h3 style="margin:0">Our Menu</h3>
-          <p class="muted" style="margin:6px 0 0">Seasonal tasting & à la carte — sample dishes below.</p>
-        </div>
-        <div class="muted">Open Tue–Sun • Dinner 6 PM – 11 PM</div>
-      </div>
+  <div class="menu-card">
+    <img class="menu-img" src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+    <h3>Cheese Burst Pizza — ₹399</h3>
+  </div>
 
-      <div class="menu-grid">
-        <article class="menu-item">
-          <h4>Heirloom Tomato Salad <span class="price" style="float:right">₹420</span></h4>
-          <p class="muted">basil oil, whipped ricotta, toasted seeds</p>
-        </article>
+  <div class="menu-card">
+    <img class="menu-img" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141">
+    <h3>Classic Burger — ₹199</h3>
+  </div>
+</div>
 
-        <article class="menu-item">
-          <h4>Grilled Paneer & Greens <span class="price" style="float:right">₹495</span></h4>
-          <p class="muted">charred lemon, mustard vinaigrette</p>
-        </article>
+<!-- ABOUT -->
+<div id="about" class="section" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5');">
+  <h1>About Us</h1>
+  <div class="box">
+    We serve handcrafted dishes made with passion and fresh ingredients.<br>
+    Enjoy authentic flavours and a premium dining experience.
+  </div>
+</div>
 
-        <article class="menu-item">
-          <h4>Seared Sea Bass <span class="price" style="float:right">₹1050</span></h4>
-          <p class="muted">coconut velouté, heirloom carrots</p>
-        </article>
+<!-- CONTACT -->
+<div id="contact" class="section" style="background-image:url('https://images.unsplash.com/photo-1532635241-17e820acc59f');">
+  <h1>Contact Us</h1>
+  <div class="box">
+    📍 Hyderabad, India<br>
+    📞 +91 98765 43210<br>
+    📧 contact@delicioso.com<br>
+    🕒 10:00 AM – 11:00 PM
+  </div>
+</div>
 
-        <article class="menu-item">
-          <h4>Wild Mushroom Risotto <span class="price" style="float:right">₹650</span></h4>
-          <p class="muted">aged parmesan, herb oil</p>
-        </article>
-
-        <article class="menu-item">
-          <h4>Slow-braised Lamb <span class="price" style="float:right">₹1180</span></h4>
-          <p class="muted">root vegetable purée, jus</p>
-        </article>
-
-        <article class="menu-item">
-          <h4>Chocolate Fondant <span class="price" style="float:right">₹350</span></h4>
-          <p class="muted">vanilla cream, seasonal fruit</p>
-        </article>
-      </div>
-
-      <div class="gallery" id="gallery" style="margin-top:24px">
-        <div style="border-radius:12px;overflow:hidden">
-          <img alt="restaurant interior" src="https://images.unsplash.com/photo-1555992336-cbf4c4a8e3b9?auto=format&fit=crop&w=1200&q=80">
-        </div>
-        <div style="display:grid;gap:12px">
-          <img alt="dish" style="border-radius:12px;object-fit:cover;height:100%" src="https://images.unsplash.com/photo-1543352634-6f6e7b5b3f3a?auto=format&fit=crop&w=800&q=60">
-          <img alt="cocktail" style="border-radius:12px;object-fit:cover;height:100%" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60">
-        </div>
-      </div>
-    </section>
-
-    <section id="about" style="padding:28px 18px">
-      <div class="two-col card">
-        <div>
-          <h3 style="margin-top:0">About La Bella</h3>
-          <p class="muted">La Bella began as a small neighborhood kitchen with a simple mission: serve seasonal food that feels like home. Our chef de cuisine builds menus around local farmers and producers — dishes change often to highlight what’s freshest.</p>
-          <ul style="margin:12px 0;padding-left:18px;color:var(--muted)">
-            <li>Farm-first sourcing</li>
-            <li>Vegetarian-friendly options</li>
-            <li>Private dining & events</li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="margin:0">Private Events</h4>
-          <p class="muted">Host a rehearsal dinner, birthday, or corporate event in our private dining room — tasting menus and custom bar packages available.</p>
-          <div style="height:12px"></div>
-          <a class="btn" href="#contact">Enquire</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" style="padding:28px 18px">
-      <div class="card">
-        <div style="display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-          <div style="flex:1;min-width:220px">
-            <h3 style="margin-top:0">Contact & Location</h3>
-            <p class="muted">123 Food Lane, Downtown • Open Tue–Sun 6 PM – 11 PM</p>
-            <p class="muted">Phone: +91 98765 43210 • Email: hello@labella.example</p>
-          </div>
-
-          <form style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:8px">
-            <input placeholder="Your name" />
-            <input placeholder="Email" type="email" />
-            <input placeholder="Message" />
-            <div style="display:flex;gap:8px;justify-content:flex-end">
-              <button class="btn" type="button">Send</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-      <div class="muted">© 2025 La Bella — All rights reserved</div>
-      <div class="muted">Designed with care • Instagram • Facebook</div>
-    </div>
-  </footer>
 </body>
 </html>
