@@ -1,81 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Delicioso Restaurant</title>
-
-<style>
-  body { margin:0; font-family: Arial; background:#111; color:white; text-align:center; }
-  nav { background:#000a; padding:15px; position:sticky; top:0; }
-  nav a { color:#ffcc00; margin:15px; cursor:pointer; font-weight:bold; text-decoration:none; }
-  .section { display:none; padding:40px; min-height:90vh; background-size:cover; background-position:center; }
-  .active { display:block; }
-  .menu-card, .box { background:#0008; margin:20px auto; padding:20px; width:60%; border-radius:12px; }
-  .menu-img { width:250px; border-radius:12px; }
-</style>
-
-<script>
-  function show(id){
-    document.querySelectorAll('.section').forEach(s=>s.style.display="none");
-    document.getElementById(id).style.display="block";
-  }
-</script>
+  <meta charset="UTF-8">
+  <title>Creative Food Ordering App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .menu, .cart {
+      margin: 20px auto;
+      max-width: 700px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      transition: transform 0.3s;
+    }
+    .menu-item:hover {
+      transform: scale(1.05);
+    }
+    .menu-item img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background: #218838;
+      transform: scale(1.1);
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .total {
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    .checkout {
+      background: #007bff;
+      margin-top: 15px;
+    }
+    .checkout:hover {
+      background: #0056b3;
+    }
+    /* Checkout modal */
+    #checkout-modal {
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      text-align: center;
+      z-index: 1000;
+    }
+    #checkout-modal h2 {      margin-top: 0;
+      color: #28a745;
+    }
+    #checkout-modal button {
+      background: #dc3545;
+      margin-top: 15px;
+    }
+    #checkout-modal button:hover {
+      background: #c82333;
+    }
+  </style>
 </head>
+<body>
+  <h1> aiml c restarant  </h1>
 
-<body onload="show('home')">
+  <div class="menu">
+    <h2>Menu</h2>
+    <div class="menu-item">
+      <span><img src=C:\Users\lovky\Downloads\burger.png alt="Burger"> Burger -250 </span>
+      <button onclick="addToCart('Burger', 250)">Add</button>
+    </div>
+    <div class="menu-item">
+      <span><img src="C:\Users\lovky\Downloads\pizza.jpg" alt="Pizza"> Pizza - 150</span>
+      <button onclick="addToCart('Pizza', 150)">Add</button>
+    </div>
+    <div class="menu-item">
+      <span><img src="C:\Users\lovky\Downloads\pasta.jpg" alt="Pasta"> Pasta - 100</span>
+      <button onclick="addToCart('Pasta', 100)">Add</button>
+    </div>
+    <div class="menu-item">
+      <span><img src="C:\Users\lovky\Downloads\salad.jpg" alt="Salad"> Salad - 50</span>
+      <button onclick="addToCart('Salad', 50)">Add</button>
+    <div class="menu-item">
+      <span><img src ="C:\Users\lovky\Downloads\buutr.jpg" alt="buttermilk"> buttermilk-20</span>
+      <button onclick="addtocart('buttermilk',20)">Add</button>
+    </div>
+ </div>
 
-<nav>
-  <a onclick="show('home')">Home</a>
-  <a onclick="show('menu')">Menu</a>
-  <a onclick="show('about')">About</a>
-  <a onclick="show('contact')">Contact</a>
-</nav>
-
-<!-- HOME -->
-<div id="home" class="section" style="background-image:url('https://images.unsplash.com/photo-1528605248644-14dd04022da1');">
-  <h1 style="margin-top:120px; font-size:3rem; text-shadow:2px 2px 10px black;">Delicioso Restaurant</h1>
-  <p>Fresh • Authentic • Delicious</p>
-</div>
-
-<!-- MENU -->
-<div id="menu" class="section" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836');">
-  <h1>Our Menu</h1>
-
-  <div class="menu-card">
-    <img class="menu-img" src="https://images.unsplash.com/photo-1604908176833-9fb7d0adf8b8">
-    <h3>Italian Pasta — ₹299</h3>
+  <div class="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <div class="total">Total: $<span id="total">0</span></div>
+    <button class="checkout" onclick="checkout()">Checkout</button>
   </div>
 
-  <div class="menu-card">
-    <img class="menu-img" src="https://images.unsplash.com/photo-1550547660-d9450f859349">
-    <h3>Cheese Burst Pizza — ₹399</h3>
+  <!-- Checkout modal -->
+  <div id="checkout-modal">
+    <h2>🎉 Order Confirmed thank you !</h2>
+    <p id="checkout-message"></p>
+    <button onclick="closeModal()">Close</button>
   </div>
 
-  <div class="menu-card">
-    <img class="menu-img" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141">
-    <h3>Classic Burger — ₹199</h3>
-  </div>
-</div>
+  <script>
+    let cart = [];
+    let total = 0;
 
-<!-- ABOUT -->
-<div id="about" class="section" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5');">
-  <h1>About Us</h1>
-  <div class="box">
-    We serve handcrafted dishes made with passion and fresh ingredients.<br>
-    Enjoy authentic flavours and a premium dining experience.
-  </div>
-</div>
+    function addToCart(item, price) {
+      cart.push({item, price});
+      total += price;
+      renderCart();
+    }
 
-<!-- CONTACT -->
-<div id="contact" class="section" style="background-image:url('https://images.unsplash.com/photo-1532635241-17e820acc59f');">
-  <h1>Contact Us</h1>
-  <div class="box">
-    📍 Hyderabad, India<br>
-    📞 +91 98765 43210<br>
-    📧 contact@delicioso.com<br>
-    🕒 10:00 AM – 11:00 PM
-  </div>
-</div>
+    function renderCart() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      cartItemsDiv.innerHTML = '';
+      cart.forEach((c, index) => {
+        cartItemsDiv.innerHTML += `
+          <div class="cart-item">
+            <span>${c.item} - $${c.price}</span>
+            <button onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
+      });
+      const totalSpan = document.getElementById('total');
+      totalSpan.innerText = total;
+      totalSpan.style.color = "red";
+      setTimeout(() => totalSpan.style.color = "black", 500);
+    }
 
+    function removeItem(index) {
+      total -= cart[index].price;
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function checkout() {
+      if(cart.length === 0) {
+        alert("Your cart is empty!");
+      } else {
+        document.getElementById('checkout-message').innerText = "Thank you! Total: $" + total;
+        document.getElementById('checkout-modal').style.display = "block";
+        cart = [];
+        total = 0;
+        renderCart();
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('checkout-modal').style.display = "none";
+    }
+    <p> @degin for the project purpose only </p>
+  </script>
 </body>
 </html>
