@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -84,7 +84,8 @@
       text-align: center;
       z-index: 1000;
     }
-    #checkout-modal h2 {      margin-top: 0;
+    #checkout-modal h2 {
+      margin-top: 0;
       color: #28a745;
     }
     #checkout-modal button {
@@ -97,30 +98,27 @@
   </style>
 </head>
 <body>
-  <h1> aiml c restarant  </h1>
+  <h1>🍔 Creative Food Ordering App</h1>
 
   <div class="menu">
     <h2>Menu</h2>
     <div class="menu-item">
-      <span><img src=C:\Users\lovky\Downloads\burger.png alt="Burger"> Burger -250 </span>
-      <button onclick="addToCart('Burger', 250)">Add</button>
+      <span><img src="C:\Users\lovky\Downloads\burger.png" alt="Burger"> Burger - $100</span>
+      <button onclick="addToCart('Burger', 100)">Add</button>
     </div>
     <div class="menu-item">
-      <span><img src="C:\Users\lovky\Downloads\pizza.jpg" alt="Pizza"> Pizza - 150</span>
+      <span><img src="C:\Users\lovky\Downloads\pizza.jpg" alt="Pizza"> Pizza - $150</span>
       <button onclick="addToCart('Pizza', 150)">Add</button>
     </div>
     <div class="menu-item">
-      <span><img src="C:\Users\lovky\Downloads\pasta.jpg" alt="Pasta"> Pasta - 100</span>
-      <button onclick="addToCart('Pasta', 100)">Add</button>
+      <span><img src="C:\Users\lovky\Downloads\pasta.jpg" alt="Pasta"> Pasta - $200</span>
+      <button onclick="addToCart('Pasta', 200)">Add</button>
     </div>
     <div class="menu-item">
-      <span><img src="C:\Users\lovky\Downloads\salad.jpg" alt="Salad"> Salad - 50</span>
+      <span><img src="C:\Users\lovky\Downloads\salad.jpg" alt="Salad"> Salad - $50</span>
       <button onclick="addToCart('Salad', 50)">Add</button>
-    <div class="menu-item">
-      <span><img src ="C:\Users\lovky\Downloads\buutr.jpg" alt="buttermilk"> buttermilk-20</span>
-      <button onclick="addtocart('buttermilk',20)">Add</button>
     </div>
- </div>
+  </div>
 
   <div class="cart">
     <h2>Your Cart</h2>
@@ -131,7 +129,7 @@
 
   <!-- Checkout modal -->
   <div id="checkout-modal">
-    <h2>🎉 Order Confirmed thank you !</h2>
+    <h2>🎉 Order Confirmed!</h2>
     <p id="checkout-message"></p>
     <button onclick="closeModal()">Close</button>
   </div>
@@ -184,7 +182,6 @@
     function closeModal() {
       document.getElementById('checkout-modal').style.display = "none";
     }
-    <p> @degin for the project purpose only </p>
   </script>
 </body>
 </html>
